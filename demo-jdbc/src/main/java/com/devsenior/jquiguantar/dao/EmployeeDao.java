@@ -98,7 +98,7 @@ public class EmployeeDao {
         var employees = new ArrayList<Employee>();
         var url = "jdbc:postgresql://localhost:5432/RH";
         var user = "postgres";
-        var pass = "Ganimedes5.-";
+        var pass = "";
 
         try (var conn = DriverManager.getConnection(url, user, pass);
                 var stmt = conn.prepareStatement("SELECT * from EMPLOYEES");
