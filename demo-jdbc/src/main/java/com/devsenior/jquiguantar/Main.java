@@ -25,16 +25,8 @@ public class Main {
         employee.setDepartmentId(10);
         employee.setHirDate(LocalDate.of(2025, 1, 1));
         var employeeDao = new EmployeeDao();
-        // employeeDao.saveEmployee(employee);
-        // employee.setLastName("Diaz Arriera");
-        // employee.setPhoneNumber("3207665432");
-        // employeeDao.updateEmployee(1, employee);
 
-        // employeeDao.deleteEmployee(34);
-
-        // employeeDao.finAllEmployees().forEach(System.out::println);
-
-        employeeDao.findEmployeeById(1);
+        employeeDao.findAll().forEach(System.out::println);
 
     }
 
