@@ -1,20 +1,18 @@
 package com.devsenior.jquiguantar.dao;
 
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 import com.devsenior.jquiguantar.vo.Employee;
 
-public class EmployeeDao {
+public class EmployeeDao extends AbstractDao<Employee, Integer> {
 
-    public void saveEmployee(Employee employee) {
-        var url = "jdbc:postgresql://localhost:5432/RH";
-        var user = "postgres";
-        var pass = "";
+    @Override
+    public void save(Employee employee) {
 
         try {
-            var conn = DriverManager.getConnection(url, user, pass);
+            var conn = getConnection();
             var stmt = conn.createStatement();
 
             var format = """
@@ -38,12 +36,10 @@ public class EmployeeDao {
 
     }
 
-    public void updateEmployee(Integer id, Employee employee) {
-        var url = "jdbc:postgresql://localhost:5432/RH";
-        var user = "postgres";
-        var pass = "";
+    @Override
+    public void update(Integer id, Employee employee) {
 
-        try (var conn = DriverManager.getConnection(url, user, pass);
+        try (var conn = getConnection();
                 var stmt = conn.createStatement()) {
 
             var format = """
@@ -74,12 +70,10 @@ public class EmployeeDao {
         }
     }
 
-    public void deleteEmployee(Integer id) {
-        var url = "jdbc:postgresql://localhost:5432/RH";
-        var user = "postgres";
-        var pass = "";
+    @Override
+    public void delete(Integer id) {
 
-        try (var conn = DriverManager.getConnection(url, user, pass);
+        try (var conn = getConnection();
                 var stmt = conn.prepareStatement("delete from employees where employee_id = ?")) {
 
             stmt.setInt(1, id);
@@ -94,13 +88,11 @@ public class EmployeeDao {
         }
     }
 
-    public List<Employee> finAllEmployees() {
+    @Override
+    public List<Employee> findAll() {
         var employees = new ArrayList<Employee>();
-        var url = "jdbc:postgresql://localhost:5432/RH";
-        var user = "postgres";
-        var pass = "";
 
-        try (var conn = DriverManager.getConnection(url, user, pass);
+        try (var conn = getConnection();
                 var stmt = conn.prepareStatement("SELECT * from EMPLOYEES");
                 var rset = stmt.executeQuery()) {
 
@@ -131,13 +123,12 @@ public class EmployeeDao {
         return employees;
     }
 
-    public Employee findEmployeeById(Integer id) {
-        var url = "jdbc:postgresql://localhost:5432/RH";
-        var user = "postgres";
-        var pass = "";
+    @Override
+    public Employee findById(Integer id) {
+
         Employee employee = null;
 
-        try (var conn = DriverManager.getConnection(url, user, pass);
+        try (var conn = getConnection();
                 var stmt = conn.prepareStatement("SELECT * FROM EMPLOYEES WHERE employee_id = ?")) {
 
             stmt.setInt(1, id);
