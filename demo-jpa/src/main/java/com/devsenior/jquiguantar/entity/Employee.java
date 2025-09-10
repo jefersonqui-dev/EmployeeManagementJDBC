@@ -32,20 +32,21 @@ public class Employee {
     private String phoneNumber;
 
     @Column(name = "hire_date", nullable = false)
-    private LocalDate hirDate;
+    private LocalDate hireDate;
 
-    @Column(name = "job_id")
-    private Integer jobId;
+    @ManyToOne
+    @JoinColumn(name = "job_id")
+    private Job job;
 
     @Column(precision = 2, nullable = false)
     private Double salary;
 
     @ManyToOne
-    @JoinColumn(name = "manager_id", referencedColumnName = "manager_id")
+    @JoinColumn(name = "manager_id")
     private Employee manager;
 
     @ManyToOne
-    @JoinColumn(name = "department_id", referencedColumnName = "department_id")
+    @JoinColumn(name = "department_id")
     private Department department;
 
     public Integer getEmployeeId() {
@@ -88,20 +89,20 @@ public class Employee {
         this.phoneNumber = phoneNumber;
     }
 
-    public LocalDate getHirDate() {
-        return hirDate;
+    public LocalDate getHireDate() {
+        return hireDate;
     }
 
-    public void setHirDate(LocalDate hirDate) {
-        this.hirDate = hirDate;
+    public void setHireDate(LocalDate hireDate) {
+        this.hireDate = hireDate;
     }
 
-    public Integer getJobId() {
-        return jobId;
+    public Job getJob() {
+        return job;
     }
 
-    public void setJobId(Integer jobId) {
-        this.jobId = jobId;
+    public void setJob(Job job) {
+        this.job = job;
     }
 
     public Double getSalary() {
@@ -130,7 +131,18 @@ public class Employee {
 
     @Override
     public String toString() {
-
-        return "Soy el empleado con id" + employeeId;
+        return "Soy el Empleado con id " + employeeId;
+        // return "Employee{" +
+        // "employeeId=" + employeeId +
+        // ", firstName='" + firstName + '\'' +
+        // ", lastName='" + lastName + '\'' +
+        // ", email='" + email + '\'' +
+        // ", hireDate=" + hireDate +
+        // ", job=" + (job != null ? job.getTitle() : "N/A") +
+        // ", salary=" + salary +
+        // ", department=" + (department != null ? department.getName() : "N/A") +
+        // ", manager=" + (manager != null ? manager.getFirstName() + " " +
+        // manager.getLastName() : "N/A") +
+        // '}';
     }
 }
