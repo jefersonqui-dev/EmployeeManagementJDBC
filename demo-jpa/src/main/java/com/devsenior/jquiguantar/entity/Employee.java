@@ -131,7 +131,12 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "Soy el Empleado con id " + employeeId;
+        return "Soy el Empleado con id " + employeeId +
+                ", depto: " + (department != null ? department.getName() : "N/A") +
+                ", trabajo: " + (job != null ? job.getTitle() : "N/A") +
+                ", jefe: " + (manager != null ? manager.getFirstName() + " " + manager.getLastName() : "N/A");
+        // return "Soy el Empleado con id " + employeeId + " y mi departamento es " +
+        // department.getName();
         // return "Employee{" +
         // "employeeId=" + employeeId +
         // ", firstName='" + firstName + '\'' +
